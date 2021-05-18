@@ -1,0 +1,62 @@
+
+
+Create table DVC (
+	DVCID INTEGER PRIMARY KEY);
+
+
+
+Create table Teams (
+	TeamID INTEGER PRIMARY KEY,
+	TeamName varchar (20),
+	DVCID INTEGER,
+	Foreign Key(DVCID) references DVC);
+
+
+Create table Rosters (
+	RosterID INTEGER PRIMARY KEY,
+	Name varchar (20),
+	Height INTEGER,
+	Position varchar (20),
+	TeamID INTEGER, 
+	PlayersID INTEGER,
+	Foreign Key(TeamID) references Teams,
+ 	Foreign Key(PlayersID) references Players);
+
+
+Create table Players (
+	PlayersID INTEGER PRIMARY KEY,
+	Name varchar (20),
+	JerseyNumber INTEGER,
+	RosterID INTEGER,
+ 	Foreign Key(RosterID) references Roster);
+
+Create table Rosters (
+	RosterID INTEGER PRIMARY KEY,
+	Name varchar (20),
+	Height INTEGER,
+	Position varchar (20),
+	TeamID INTEGER,
+	PlayersID INTEGER,
+	Foreign Key(TeamID) references Teams,
+ 	Foreign Key(PlayersID) references Players);
+
+Create table Playoffs (
+	PlayoffsID INTEGER PRIMARY KEY,
+	TeamID INTEGER,
+ 	Foreign Key(TeamID) references Teams);
+
+
+Create table Runners_Up (
+	PlayoffsID INTEGER NOT NULL,
+	RunnersID INTEGER,
+	RunnersUpName varchar (20),
+	Primary key(playoffsID),
+ 	Foreign Key(PlayoffsID) references Playoffs);
+
+
+Create table Championship (
+	PlayoffsID INTEGER NOT NULL,
+	ChampionshipID INTEGER,
+	ChampionshipTeamName varchar (20),
+	Primary key (PlayoffsID),
+ 	Foreign Key(PlayoffsID) references Playoffs);
